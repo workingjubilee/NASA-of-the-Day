@@ -1,16 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+// STEP I - Add/Import middleware libraries, pass those into
+// the "applyMiddleware" function
+import thunk from "redux-thunk";
+import logger from "redux-logger";
 
-import rootReducer from './reducers';
+import rootReducer from "./reducers";
 
-import NASAPhoto from './components/NASAPhoto';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import NASAPhoto from "./components/NASAPhoto";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import './styles.css';
+import "./styles.css";
 
-const store = createStore(rootReducer, applyMiddleware());
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 function App() {
   return (
@@ -20,7 +24,7 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
     <App />
